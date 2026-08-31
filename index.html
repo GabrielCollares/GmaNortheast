@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GMA Northeast | Seguro e Saúde</title>
+<meta name="description" content="GMA Northeast — Corretora de planos de saúde, odontológicos e seguro de vida. Comparamos as melhores operadoras para você, sua família e sua empresa.">
+<link rel="icon" href="assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:        #1C1712;
+    --ink-soft:   rgba(28,23,18,0.68);
+    --gold-deep:  #76582D;
+    --gold:       #B58A45;
+    --gold-light: #D6B875;
+    --bg:         #F2E9D8;
+    --paper:      #F8F4EB;
+    --line: rgba(28,23,18,0.12);
+    --shadow: 0 24px 60px -30px rgba(28,23,18,0.35);
+    --ease: cubic-bezier(.16,.8,.24,1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit;}
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+
+  .eyebrow{
+    font-family:'Manrope',sans-serif;
+    font-size:0.74rem;
+    font-weight:800;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  .wrap{max-width:1240px; margin:0 auto; padding:0 40px;}
+  @media(max-width:640px){ .wrap{padding:0 22px;} }
+
+  a:focus-visible, button:focus-visible{outline:2px solid var(--gold-deep); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ================= HEADER ================= */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(242,233,216,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s var(--ease), background .3s var(--ease);
+  }
+  header.scrolled{ border-bottom-color:var(--line); background:rgba(242,233,216,0.98); }
+  .nav{ display:flex; align-items:center; justify-content:space-between; height:84px; }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .brand img{ height:44px; width:auto; object-fit:contain; }
+  .brand-name{ font-family:'Fraunces',serif; font-size:1.15rem; line-height:1.1; letter-spacing:0.02em; }
+  .brand-name b{ font-weight:600; }
+  .brand-name span{
+    display:block; font-family:'Manrope',sans-serif; font-size:0.6rem;
+    letter-spacing:0.28em; text-transform:uppercase; color:var(--gold-deep);
+    font-weight:700; margin-top:3px;
+  }
+  .nav-links{ display:flex; gap:40px; font-size:0.9rem; font-weight:600; }
+  .nav-links a{ position:relative; padding:6px 0; color:var(--ink); transition:color .25s; }
+  .nav-links a.active::after, .nav-links a:hover::after{
+    content:''; position:absolute; left:0; bottom:0; height:2px; width:100%; background:var(--gold);
+  }
+  .nav-links a:hover{color:var(--gold-deep);}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 28px; border-radius:8px;
+    font-weight:700; font-size:0.85rem; letter-spacing:0.01em;
+    cursor:pointer; border:1.5px solid transparent;
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, color .25s;
+  }
+  .btn-gold{ background:var(--gold); color:var(--paper); }
+  .btn-gold:hover{ transform:translateY(-2px); box-shadow:var(--shadow); background:var(--gold-deep); }
+  .btn-outline{ border-color:var(--ink); color:var(--ink); background:transparent; }
+  .btn-outline:hover{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+
+  .burger{ display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; }
+  .burger span{ width:24px; height:2px; background:var(--ink); display:block; }
+  @media(max-width:960px){
+    .nav-links{display:none;}
+    header .btn-outline, header .nav > div > .btn-gold{display:none;}
+    .burger{display:flex;}
+  }
+  .mobile-menu{
+    position:fixed; inset:0; background:var(--bg); z-index:99;
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
+    gap:28px; padding:0 40px; transform:translateX(100%); transition:transform .4s var(--ease);
+  }
+  .mobile-menu.open{transform:translateX(0);}
+  .mobile-menu a{ font-family:'Fraunces',serif; font-size:2rem; }
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;
+    padding:190px 0 120px;
+    background-image:url('assets/hero-banner.png');
+    background-size:cover;
+    background-position:center right;
+    overflow:hidden;
+  }
+  .hero-content{ max-width:560px; }
+  .hero h1{
+    font-size:clamp(2.6rem, 5vw, 4.2rem);
+    line-height:1.08;
+    margin:18px 0 24px;
+  }
+  .hero p.lead{
+    font-size:1.08rem; color:var(--ink-soft); max-width:460px; margin-bottom:36px;
+  }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; }
+  .hero-actions .btn-gold svg{width:16px;height:16px;}
+
+  @media(max-width:900px){
+    .hero{ padding:150px 0 220px; background-position:center 30%; }
+    .hero::before{
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(242,233,216,0.85) 45%, rgba(242,233,216,0.5) 100%);
+    }
+    .hero-content{ position:relative; z-index:1; max-width:100%; }
+  }
+
+  /* ---- feature strip, overlapping hero bottom ---- */
+  .feature-bar{
+    position:relative;
+    z-index:5;
+    margin-top:-64px;
+  }
+  .feature-card{
+    background:var(--paper);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--line);
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+  }
+  .feature-item{
+    display:flex; align-items:center; gap:16px;
+    padding:30px 28px;
+    border-right:1px solid var(--line);
+  }
+  .feature-item:last-child{border-right:none;}
+  .feature-icon{
+    width:52px; height:52px; border-radius:50%;
+    border:1.5px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    color:var(--ink);
+  }
+  .feature-icon svg{width:24px;height:24px;}
+  .feature-item p{ font-size:0.92rem; font-weight:600; line-height:1.35; }
+
+  @media(max-width:900px){
+    .feature-card{grid-template-columns:1fr 1fr;}
+    .feature-item{border-right:none; border-bottom:1px solid var(--line);}
+    .feature-item:nth-child(odd){border-right:1px solid var(--line);}
+  }
+  @media(max-width:560px){
+    .feature-card{grid-template-columns:1fr;}
+    .feature-item:nth-child(odd){border-right:none;}
+  }
+
+  /* ================= SECTIONS ================= */
+  section{padding:130px 0 110px;}
+  .section-head{ max-width:640px; margin:0 auto 60px; text-align:center; }
+  .section-head .eyebrow{ display:block; margin-bottom:14px; }
+  .section-head h2{ font-size:clamp(1.9rem,3.6vw,2.6rem); }
+  .section-head h2 u{
+    text-decoration:none;
+    background-image:linear-gradient(var(--gold-light),var(--gold-light));
+    background-repeat:no-repeat;
+    background-size:100% 8px;
+    background-position:0 92%;
+  }
+  .section-head.left{ text-align:left; margin:0 0 56px; }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---- Planos ---- */
+  .plan-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  @media(max-width:900px){ .plan-grid{grid-template-columns:1fr 1fr;} }
+  @media(max-width:640px){ .plan-grid{grid-template-columns:1fr;} }
+
+  .plan-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:30px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
+  }
+  .plan-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--gold-light); }
+  .plan-icon{
+    width:60px; height:60px; border-radius:50%; flex-shrink:0;
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold-deep);
+  }
+  .plan-icon svg{width:26px;height:26px;}
+  .plan-body{flex:1;}
+  .plan-body h3{ font-size:1.15rem; margin-bottom:6px; }
+  .plan-body p{ font-size:0.88rem; color:var(--ink-soft); }
+  .plan-arrow{
+    width:32px; height:32px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold);
+  }
+  .plan-arrow svg{width:18px;height:18px;}
+
+  /* ---- Sobre ---- */
+  .section-alt{ background:var(--paper); }
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:70px;
+    align-items:center;
+  }
+  @media(max-width:900px){ .about-grid{grid-template-columns:1fr; gap:44px;} }
+
+  .about-visual{
+    position:relative;
+    background:var(--bg);
+    border-radius:20px;
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    aspect-ratio:1/1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:50px 40px;
+  }
+  .about-visual::before{
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:6px;
+    background:linear-gradient(90deg, var(--gold-light), var(--gold) 50%, var(--gold-deep));
+    border-radius:20px 20px 0 0;
+  }
+  .about-visual img{ width:64%; max-width:230px; margin-bottom:26px; }
+  .about-visual p{ font-family:'Fraunces',serif; font-size:1.3rem; line-height:1.34; max-width:26ch; }
+  .about-visual span{
+    display:block; margin-top:14px; font-size:0.72rem; letter-spacing:0.24em;
+    text-transform:uppercase; color:var(--gold-deep); font-weight:700;
+  }
+
+  .about-copy p{ color:var(--ink-soft); margin-bottom:18px; max-width:58ch; }
+  .about-pillars{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:34px; }
+  .pillar{ border-left:2px solid var(--gold); padding-left:16px; }
+  .pillar b{ font-family:'Fraunces',serif; font-size:1.05rem; display:block; margin-bottom:4px; }
+  .pillar span{ font-size:0.88rem; color:var(--ink-soft); }
+
+  /* ---- Diferenciais ---- */
+  .diff-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  @media(max-width:700px){ .diff-list{grid-template-columns:1fr;} }
+  .diff-item{ background:var(--bg); padding:34px 8px 34px 0; display:flex; gap:22px; align-items:flex-start; }
+  .diff-item .mark{
+    width:48px; height:48px; border-radius:50%; flex-shrink:0;
+    border:1.5px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-size:1.15rem; font-weight:600; color:var(--gold-deep);
+  }
+  .diff-item div h4{ font-size:1.08rem; margin-bottom:6px; margin-top:8px; }
+  .diff-item div p{ font-size:0.9rem; color:var(--ink-soft); }
+
+  /* ---- Operadoras ---- */
+  .operators{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:8px; }
+  .operators span{
+    border:1px solid var(--line); padding:12px 24px; border-radius:40px;
+    font-size:0.85rem; font-weight:700; letter-spacing:0.02em; color:var(--ink-soft);
+    background:var(--paper);
+  }
+
+  /* ---- CTA / Contato ---- */
+  .cta-section{ background:var(--ink); color:var(--paper); position:relative; overflow:hidden; }
+  .cta-section .eyebrow{ color:var(--gold-light); }
+  .cta-section h2{ color:var(--paper); font-size:clamp(1.9rem,4vw,3rem); margin-top:14px; max-width:14ch; }
+  .cta-section p{ color:rgba(248,244,235,0.72); max-width:52ch; margin-top:18px; font-size:1.02rem; }
+  .cta-grid{ display:grid; grid-template-columns:1.2fr 0.8fr; gap:60px; align-items:center; }
+  @media(max-width:860px){ .cta-grid{grid-template-columns:1fr; gap:44px;} }
+  .cta-actions{ display:flex; gap:16px; margin-top:34px; flex-wrap:wrap; }
+  .cta-section .btn-outline{ border-color:rgba(248,244,235,0.4); color:var(--paper); }
+  .cta-section .btn-outline:hover{ background:var(--paper); color:var(--ink); }
+
+  .contact-card{ background:rgba(248,244,235,0.06); border:1px solid rgba(248,244,235,0.16); border-radius:16px; padding:36px; }
+  .contact-card .row{ display:flex; justify-content:space-between; padding:16px 0; border-bottom:1px solid rgba(248,244,235,0.12); font-size:0.92rem; }
+  .contact-card .row:last-child{border-bottom:none;}
+  .contact-card .row span:first-child{ color:rgba(248,244,235,0.55); }
+  .contact-card .row span:last-child{ font-weight:700; text-align:right; }
+
+  /* ================= FOOTER ================= */
+  footer{ background:var(--ink); color:rgba(248,244,235,0.6); padding:44px 0 34px; border-top:1px solid rgba(248,244,235,0.12); }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; font-size:0.82rem; }
+  .footer-brand{ display:flex; align-items:center; gap:10px; color:var(--paper); font-family:'Fraunces',serif; font-size:1rem; }
+  .footer-brand img{ height:26px; width:auto; object-fit:contain; }
+  .footer-links{ display:flex; gap:26px; }
+  .footer-links a:hover{ color:var(--gold-light); }
+
+  .footer-legal{ display:flex; align-items:center; gap:10px; }
+  .footer-legal .dot{ color:rgba(248,244,235,0.35); }
+  .footer-legal button{
+    background:none; border:none; cursor:pointer; padding:0;
+    font-family:inherit; font-size:0.82rem; color:rgba(248,244,235,0.6);
+    text-decoration:underline; text-underline-offset:3px; text-decoration-color:rgba(248,244,235,0.3);
+    transition:color .25s;
+  }
+  .footer-legal button:hover{ color:var(--gold-light); }
+
+  /* ---- Legal modal (Termos / Privacidade) ---- */
+  .legal-modal{
+    position:fixed; inset:0; z-index:200;
+    display:none;
+    align-items:center; justify-content:center;
+    padding:24px;
+  }
+  .legal-modal.open{ display:flex; }
+  .legal-modal__overlay{
+    position:absolute; inset:0;
+    background:rgba(28,23,18,0.55);
+    backdrop-filter:blur(2px);
+  }
+  .legal-modal__panel{
+    position:relative;
+    background:var(--paper);
+    border-radius:18px;
+    max-width:640px;
+    width:100%;
+    max-height:80vh;
+    overflow-y:auto;
+    padding:44px 40px;
+    box-shadow:0 30px 70px -20px rgba(0,0,0,0.4);
+  }
+  .legal-modal__panel h3{ font-size:1.6rem; margin:10px 0 22px; }
+  .legal-modal__body p{ color:var(--ink-soft); font-size:0.94rem; margin-bottom:14px; }
+  .legal-modal__body p:last-child{ margin-bottom:0; }
+  .legal-modal__close{
+    position:absolute; top:18px; right:18px;
+    width:36px; height:36px; border-radius:50%;
+    border:1px solid var(--line); background:var(--bg);
+    font-size:1.3rem; line-height:1; color:var(--ink);
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:background .25s, color .25s;
+  }
+  .legal-modal__close:hover{ background:var(--ink); color:var(--paper); }
+
+  .wa-float{
+    position:fixed; bottom:26px; right:26px; z-index:90;
+    width:58px; height:58px; border-radius:50%;
+    background:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 14px 30px -10px rgba(0,0,0,0.4);
+    transition:transform .3s var(--ease), background .3s;
+  }
+  .wa-float:hover{ transform:scale(1.08); background:var(--gold-deep); }
+  .wa-float svg{width:26px;height:26px;}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap nav">
+    <a href="#topo" class="brand">
+      <img src="assets/logo-mark.png" alt="GMA Northeast">
+      <div class="brand-name">
+        <b>GMA Northeast</b>
+        <span>Seguro &amp; Saúde</span>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="#topo" class="active">Início</a>
+      <a href="#planos">Planos</a>
+      <a href="#sobre">Sobre Nós</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div style="display:flex; gap:12px; align-items:center;">
+      <a href="#contato" class="btn btn-gold">
+        Fale Conosco
+        <svg viewBox="0 0 32 32" fill="currentColor" width="16" height="16"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.699 4.6 1.902 6.463L4 29l7.73-1.878A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.77 9.77 0 0 1-4.98-1.363l-.357-.212-4.588 1.115 1.147-4.472-.232-.367A9.78 9.78 0 0 1 5.273 15c0-5.914 4.813-10.727 10.728-10.727S26.729 9.086 26.729 15 21.916 24.818 16.001 24.818zm5.62-7.86c-.308-.154-1.82-.898-2.102-1.001-.282-.103-.487-.154-.692.154-.205.308-.795 1.001-.975 1.206-.18.205-.36.231-.667.077-.308-.154-1.3-.479-2.475-1.526-.915-.816-1.533-1.824-1.713-2.132-.18-.308-.019-.475.135-.628.139-.138.308-.36.462-.54.154-.18.205-.308.308-.513.103-.205.051-.385-.026-.539-.077-.154-.692-1.667-.948-2.283-.25-.6-.505-.519-.692-.528-.18-.008-.385-.01-.59-.01-.205 0-.539.077-.82.385-.282.308-1.077 1.052-1.077 2.566 0 1.514 1.103 2.977 1.257 3.182.154.205 2.17 3.312 5.257 4.644.735.317 1.308.507 1.755.649.737.235 1.408.202 1.939.123.591-.088 1.82-.744 2.077-1.463.257-.719.257-1.334.18-1.463-.077-.128-.282-.205-.59-.36z"/></svg>
+      </a>
+      <button class="burger" id="burgerBtn" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#topo">Início</a>
+  <a href="#planos">Planos</a>
+  <a href="#sobre">Sobre Nós</a>
+  <a href="#contato">Contato</a>
+</div>
+
+<main id="topo">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-content reveal in">
+        <span class="eyebrow">Proteção para o que mais importa.</span>
+        <h1>Cuidado que transforma vidas.</h1>
+        <p class="lead">Planos de saúde, odontológicos e seguro de vida com as melhores operadoras do mercado.</p>
+        <div class="hero-actions">
+          <a href="#contato" class="btn btn-gold">
+            Solicitar Cotação
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#planos" class="btn btn-outline">Saiba Mais</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURE STRIP ================= -->
+  <div class="wrap feature-bar reveal">
+    <div class="feature-card">
+      <div class="feature-item">
+        <span class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/></svg>
+        </span>
+        <p>Segurança<br>e Confiança</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
+        </span>
+        <p>Atendimento<br>Personalizado</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="9" r="5"/><path d="M9 13.5L7 21l5-3 5 3-2-7.5"/></svg>
+        </span>
+        <p>As Melhores<br>Operadoras</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.7-10-9.3C.5 8 2.3 4.5 6 4.1c2-.2 3.7.9 6 3.2 2.3-2.3 4-3.4 6-3.2 3.7.4 5.5 3.9 4 7.6C19.5 16.3 12 21 12 21z"/></svg>
+        </span>
+        <p>Cuidado para você<br>e sua família</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PLANOS ================= -->
+  <section id="planos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Nossos Planos</span>
+        <h2>Soluções completas para sua <u>saúde e bem-estar</u>.</h2>
+      </div>
+
+      <div class="plan-grid reveal">
+        <div class="plan-card">
+          <span class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.7-10-9.3C.5 8 2.3 4.5 6 4.1c2-.2 3.7.9 6 3.2 2.3-2.3 4-3.4 6-3.2 3.7.4 5.5 3.9 4 7.6C19.5 16.3 12 21 12 21z"/></svg></span>
+          <div class="plan-body">
+            <h3>Planos de Saúde</h3>
+            <p>Cobertura completa para cuidar da sua saúde e da sua família.</p>
+          </div>
+          <span class="plan-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </div>
+
+        <div class="plan-card">
+          <span class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3c-2.5 0-4.5 2-4.5 5 0 3.5 1.5 6 2 9 .3 1.8 1 3 2.5 3s2-1.6 2.2-3.4c.2-1.6.6-2.6 1.8-2.6s1.6 1 1.8 2.6C13.9 18.4 14.5 20 16 20s2.2-1.2 2.5-3c.5-3 2-5.5 2-9 0-3-2-5-4.5-5-1.4 0-2.2.7-3 1.4C12 3.7 11 3 9.5 3H8z"/></svg></span>
+          <div class="plan-body">
+            <h3>Planos Odontológicos</h3>
+            <p>Sorria com tranquilidade e tenha acesso ao melhor em odontologia.</p>
+          </div>
+          <span class="plan-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </div>
+
+        <div class="plan-card">
+          <span class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/></svg></span>
+          <div class="plan-body">
+            <h3>Seguro de Vida</h3>
+            <p>Proteção financeira para o que mais importa: sua família.</p>
+          </div>
+          <span class="plan-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </div>
+
+        <div class="plan-card">
+          <span class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="9" width="16" height="12" rx="1"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg></span>
+          <div class="plan-body">
+            <h3>Planos Empresariais</h3>
+            <p>Benefícios de saúde para sua equipe com condições especiais.</p>
+          </div>
+          <span class="plan-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </div>
+
+        <div class="plan-card">
+          <span class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3 2.7-5 6-5s6 2 6 5M14 15.5c2.8.3 4 2 4 4.5"/></svg></span>
+          <div class="plan-body">
+            <h3>Planos por Adesão</h3>
+            <p>Condições exclusivas via sindicatos e associações de classe.</p>
+          </div>
+          <span class="plan-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </div>
+
+        <div class="plan-card">
+          <span class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l5-5 4 4 8-8M14 8h6v6"/></svg></span>
+          <div class="plan-body">
+            <h3>Consultoria e Gestão</h3>
+            <p>Análise de custos, renovação e migração de planos para empresas.</p>
+          </div>
+          <span class="plan-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SOBRE ================= -->
+  <section id="sobre" class="section-alt">
+    <div class="wrap about-grid">
+      <div class="about-visual reveal">
+        <img src="assets/logo-mark.png" alt="Logo GMA Northeast">
+        <p>Seguro e saúde com identidade nordestina</p>
+        <span>Fortaleza · Ceará</span>
+      </div>
+      <div class="about-copy reveal">
+        <span class="eyebrow">Quem somos</span>
+        <h2 style="margin-top:14px; font-size:clamp(1.9rem,3.4vw,2.6rem);">Uma corretora que fala a língua do Nordeste</h2>
+        <p style="margin-top:20px;">A GMA Northeast nasceu para simplificar a contratação de planos de saúde, odontológicos e seguros de vida em Fortaleza e região. Trabalhamos como um elo entre você e as principais operadoras do país — sem burocracia, com transparência total sobre coberturas, carências e valores.</p>
+        <p>Nossa consultoria é gratuita: comparamos as opções do mercado e recomendamos o plano que realmente cabe na sua realidade, seja para uso pessoal, familiar ou para os colaboradores da sua empresa.</p>
+        <div class="about-pillars">
+          <div class="pillar"><b>Consultoria imparcial</b><span>Comparamos operadoras sem favorecer nenhuma.</span></div>
+          <div class="pillar"><b>Suporte contínuo</b><span>Acompanhamos você da contratação ao pós-venda.</span></div>
+          <div class="pillar"><b>Agilidade</b><span>Cotação e proposta em poucas horas.</span></div>
+          <div class="pillar"><b>Raiz local</b><span>Atendimento presencial em Fortaleza (CE).</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DIFERENCIAIS ================= -->
+  <section id="diferenciais">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Por que a GMA Northeast</span>
+        <h2>O cuidado que faz a diferença no seu dia a dia</h2>
+      </div>
+      <div class="diff-list reveal">
+        <div class="diff-item">
+          <span class="mark">G</span>
+          <div><h4>Cotação sem compromisso</h4><p>Você recebe a comparação de planos sem qualquer custo ou obrigação de contratação.</p></div>
+        </div>
+        <div class="diff-item">
+          <span class="mark">M</span>
+          <div><h4>Melhor custo-benefício</h4><p>Cruzamos preço, rede credenciada e cobertura para indicar a opção mais vantajosa.</p></div>
+        </div>
+        <div class="diff-item">
+          <span class="mark">A</span>
+          <div><h4>Atendimento humano</h4><p>Um consultor dedicado acompanha cada etapa, da cotação à utilização do plano.</p></div>
+        </div>
+        <div class="diff-item">
+          <span class="mark">+</span>
+          <div><h4>Pós-venda ativo</h4><p>Suporte para boletos, reajustes, inclusões e sinistros durante toda a vigência do contrato.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= OPERADORAS ================= -->
+  <section id="operadoras" class="section-alt">
+    <div class="wrap">
+      <div class="section-head reveal" style="margin-bottom:32px;">
+        <span class="eyebrow">Rede de parceiros</span>
+        <h2>Trabalhamos com as principais operadoras do mercado</h2>
+        <p style="color:var(--ink-soft); margin-top:16px;">Comparamos entre diversas operadoras nacionais e regionais para encontrar a cobertura ideal — sem vínculo exclusivo com nenhuma delas.</p>
+      </div>
+      <div class="operators reveal">
+        <span>Planos de Saúde</span>
+        <span>Planos Odontológicos</span>
+        <span>Seguro de Vida</span>
+        <span>Planos Empresariais</span>
+        <span>Planos por Adesão</span>
+        <span>Cobertura Nacional</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA / CONTATO ================= -->
+  <section id="contato" class="cta-section">
+    <div class="wrap cta-grid">
+      <div class="reveal">
+        <span class="eyebrow">Vamos conversar</span>
+        <h2>Peça sua cotação gratuita hoje mesmo</h2>
+        <p>Fale agora com um consultor da GMA Northeast e receba uma comparação personalizada de planos em poucas horas.</p>
+        <div class="cta-actions">
+          <a href="https://wa.me/5511916123708" target="_blank" rel="noopener" class="btn btn-gold">Falar no WhatsApp</a>
+          <a href="mailto:gmanortheast@gmail.com" class="btn btn-outline">Enviar e-mail</a>
+        </div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="row"><span>WhatsApp</span><span>(11) 91612-3708</span></div>
+        <div class="row"><span>E-mail</span><span>gmanortheast@gmail.com</span></div>
+        <div class="row"><span>Atendimento</span><span>Seg. a Sex., 8h às 18h</span></div>
+        <div class="row"><span>Localização</span><span>Fortaleza · CE</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <a href="#topo" class="footer-brand">
+      <img src="assets/logo-mark.png" alt="GMA Northeast">
+      GMA Northeast
+    </a>
+    <div class="footer-links">
+      <a href="#planos">Planos</a>
+      <a href="#sobre">Sobre Nós</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div class="footer-legal">
+      <button type="button" data-modal="termos">Termos de Uso</button>
+      <span class="dot">·</span>
+      <button type="button" data-modal="privacidade">Política de Privacidade</button>
+    </div>
+    <span>&copy; 2026 GMA Northeast Seguro e Saúde. Todos os direitos reservados.</span>
+  </div>
+</footer>
+
+<!-- ============ MODAIS: TERMOS / PRIVACIDADE ============ -->
+<div class="legal-modal" id="modal-termos" aria-hidden="true">
+  <div class="legal-modal__overlay" data-close></div>
+  <div class="legal-modal__panel" role="dialog" aria-modal="true" aria-labelledby="termos-title">
+    <button type="button" class="legal-modal__close" data-close aria-label="Fechar">&times;</button>
+    <span class="eyebrow">Termos de Uso</span>
+    <h3 id="termos-title">Termos de Uso</h3>
+    <div class="legal-modal__body">
+      <p>Este site tem finalidade informativa e institucional, apresentando os serviços de corretagem de planos de saúde, odontológicos e seguro de vida oferecidos pela GMA Northeast Seguro e Saúde.</p>
+      <p>As informações sobre planos, coberturas e valores exibidas aqui têm caráter geral e não substituem a proposta comercial formal, que é elaborada individualmente conforme a operadora escolhida, o perfil do contratante e as condições vigentes no momento da contratação.</p>
+      <p>Ao utilizar este site e nossos canais de contato (WhatsApp, e-mail e formulários), você concorda em fornecer informações verdadeiras para viabilizar o atendimento e a elaboração de cotações.</p>
+      <p>A GMA Northeast pode atualizar este conteúdo periodicamente para refletir mudanças em seus serviços, sem aviso prévio.</p>
+      <p style="color:var(--ink-soft); font-size:0.85rem;">Este é um texto-modelo. Recomendamos revisão por um profissional jurídico antes da publicação oficial.</p>
+    </div>
+  </div>
+</div>
+
+<div class="legal-modal" id="modal-privacidade" aria-hidden="true">
+  <div class="legal-modal__overlay" data-close></div>
+  <div class="legal-modal__panel" role="dialog" aria-modal="true" aria-labelledby="privacidade-title">
+    <button type="button" class="legal-modal__close" data-close aria-label="Fechar">&times;</button>
+    <span class="eyebrow">Privacidade</span>
+    <h3 id="privacidade-title">Política de Privacidade</h3>
+    <div class="legal-modal__body">
+      <p>A GMA Northeast respeita a sua privacidade e trata os dados pessoais coletados por meio deste site (como nome, telefone e e-mail) exclusivamente para fins de atendimento, elaboração de cotações e comunicação sobre planos de saúde, odontológicos e seguros de vida.</p>
+      <p>Não compartilhamos seus dados com terceiros para fins de marketing sem o seu consentimento. Dados podem ser repassados às operadoras parceiras apenas quando necessário para a elaboração e contratação do plano escolhido.</p>
+      <p>Você pode solicitar a qualquer momento a atualização, correção ou exclusão dos seus dados, entrando em contato pelo e-mail <strong>gmanortheast@gmail.com</strong> ou pelo WhatsApp informado neste site, em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).</p>
+      <p style="color:var(--ink-soft); font-size:0.85rem;">Este é um texto-modelo. Recomendamos revisão por um profissional jurídico antes da publicação oficial.</p>
+    </div>
+  </div>
+</div>
+
+<a href="https://wa.me/5511916123708" target="_blank" rel="noopener" class="wa-float" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 32 32" fill="#1C1712"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.699 4.6 1.902 6.463L4 29l7.73-1.878A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.77 9.77 0 0 1-4.98-1.363l-.357-.212-4.588 1.115 1.147-4.472-.232-.367A9.78 9.78 0 0 1 5.273 15c0-5.914 4.813-10.727 10.728-10.727S26.729 9.086 26.729 15 21.916 24.818 16.001 24.818zm5.62-7.86c-.308-.154-1.82-.898-2.102-1.001-.282-.103-.487-.154-.692.154-.205.308-.795 1.001-.975 1.206-.18.205-.36.231-.667.077-.308-.154-1.3-.479-2.475-1.526-.915-.816-1.533-1.824-1.713-2.132-.18-.308-.019-.475.135-.628.139-.138.308-.36.462-.54.154-.18.205-.308.308-.513.103-.205.051-.385-.026-.539-.077-.154-.692-1.667-.948-2.283-.25-.6-.505-.519-.692-.528-.18-.008-.385-.01-.59-.01-.205 0-.539.077-.82.385-.282.308-1.077 1.052-1.077 2.566 0 1.514 1.103 2.977 1.257 3.182.154.205 2.17 3.312 5.257 4.644.735.317 1.308.507 1.755.649.737.235 1.408.202 1.939.123.591-.088 1.82-.744 2.077-1.463.257-.719.257-1.334.18-1.463-.077-.128-.282-.205-.59-.36z"/></svg>
+</a>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 12);
+  }, {passive:true});
+
+  const burger = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.12});
+  revealEls.forEach(el => io.observe(el));
+
+  // legal modals (Termos de Uso / Política de Privacidade)
+  document.querySelectorAll('[data-modal]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = document.getElementById('modal-' + btn.dataset.modal);
+      if(modal){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    });
+  });
+  document.querySelectorAll('.legal-modal').forEach(modal => {
+    modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => closeModal(modal)));
+  });
+  function closeModal(modal){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){
+      document.querySelectorAll('.legal-modal.open').forEach(closeModal);
+    }
+  });
+</script>
+
+</body>
+</html>
